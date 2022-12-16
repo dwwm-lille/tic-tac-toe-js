@@ -1,5 +1,7 @@
 // Variables nécessaires pour le jeu
 let gameState = ['', '', '', '', '', '', '', '', ''];
+let currentPlayer = 'X';
+
 // Ecouter le clic sur chacune des cases
 document.querySelectorAll('.cell').forEach(function (cell) {
     cell.addEventListener('click', handleClick);
@@ -16,7 +18,16 @@ function handleClick(event) {
     }
 
     // On remplit le tableau pour suivre l'état du jeu
-    gameState[index] = 'X';
+    gameState[index] = currentPlayer;
     // On mets à jour "l'interface" du jeu
-    cell.innerHTML = 'X';
+    cell.innerHTML = currentPlayer;
+
+    // Changer le joueur actuel (Si c'est X, il devient O sinon il devient X)
+    currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+
+    // if (currentPlayer == 'X') {
+    //     currentPlayer = 'O';
+    // } else {
+    //     currentPlayer = 'X';
+    // }
 }
