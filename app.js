@@ -11,6 +11,9 @@ let statusElement = document.querySelector('.status');
 // Le premier 4 se récupère comme ça
 // console.log(wins[1][1]);
 
+// On affiche le tour du joueur au début
+statusElement.innerHTML = `C'est le tour du joueur ${currentPlayer}`;
+
 // Ecouter le clic sur chacune des cases
 document.querySelectorAll('.cell').forEach(function (cell) {
     cell.addEventListener('click', handleClick);
@@ -33,9 +36,6 @@ function handleClick(event) {
 
     // Vérifier si le jeu est gagné ou nul
     checkEndGame();
-
-    // Changer le joueur actuel (Si c'est X, il devient O sinon il devient X)
-    currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
 
     // if (currentPlayer == 'X') {
     //     currentPlayer = 'O';
@@ -73,6 +73,10 @@ function checkEndGame() {
         statusElement.innerHTML = `Le joueur ${currentPlayer} a gagné !`;
     } else if (!gameState.includes('')) { // Si le tableau n'a aucune case vide, match nul
         statusElement.innerHTML = `Partie nulle !`;
+    } else {
+        // Changer le joueur actuel (Si c'est X, il devient O sinon il devient X)
+        currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+        statusElement.innerHTML = `C'est le tour du joueur ${currentPlayer}`;
     }
 
     console.log(gameState);
