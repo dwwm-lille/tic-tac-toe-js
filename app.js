@@ -7,6 +7,7 @@ let wins = [
     [0, 4, 8], [2, 4, 6], // Diagonales
 ];
 let statusElement = document.querySelector('.status');
+let active = true;
 
 // Le premier 4 se récupère comme ça
 // console.log(wins[1][1]);
@@ -24,8 +25,8 @@ function handleClick(event) {
     let cell = event.target; // Récupère la case cliquée
     let index = cell.dataset.cell; // Récupère la valeur du data-cell=
 
-    // Vérifier si la case n'est pas vide
-    if (gameState[index] != '') {
+    // Vérifier si la case n'est pas vide ou que la partie est terminée
+    if (gameState[index] != '' || !active) {
         return; // On stoppe le code et rien ne se passe si la case est remplie
     }
 
@@ -71,8 +72,10 @@ function checkEndGame() {
 
     if (winRound) { // Si le joueur current a gagné
         statusElement.innerHTML = `Le joueur ${currentPlayer} a gagné !`;
+        active = false; // On arrête la partie
     } else if (!gameState.includes('')) { // Si le tableau n'a aucune case vide, match nul
         statusElement.innerHTML = `Partie nulle !`;
+        active = false; // On arrête la partie
     } else {
         // Changer le joueur actuel (Si c'est X, il devient O sinon il devient X)
         currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
