@@ -20,6 +20,9 @@ document.querySelectorAll('.cell').forEach(function (cell) {
     cell.addEventListener('click', handleClick);
 });
 
+// Ecouter le clic sur le bouton restart
+document.querySelector('.restart').addEventListener('click', handleRestart);
+
 // Fonction où on va ranger la logique du clic sur une case
 function handleClick(event) {
     let cell = event.target; // Récupère la case cliquée
@@ -83,4 +86,17 @@ function checkEndGame() {
     }
 
     console.log(gameState);
+}
+
+// Fonction qui permet de réinitialiser la partie
+function handleRestart() {
+    currentPlayer = 'X';
+    gameState = ['', '', '', '', '', '', '', '', ''];
+    active = true;
+    statusElement.innerHTML = `C'est le tour du joueur ${currentPlayer}`;
+
+    // On vide toutes les cases du jeu
+    document.querySelectorAll('.cell').forEach(function (cell) {
+        cell.innerHTML = '';
+    });
 }
